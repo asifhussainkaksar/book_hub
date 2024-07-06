@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Hub</title>
+</head>
+<body>
+    <%if(locals.err){%>
+        <p><%=err%></p>
+    <%}%>
+    <p>create your account</p>
+    <form action="/sign_up" method="POST">
+        <input type="text" placeholder="username" name="username" >
+        <br/>
+        <input type="email" placeholder="email" name="email">
+        <br/>
+        <input type="text" placeholder="password" name="password">
+        <br/>
+        <input type="text" placeholder="confirm password" name="confirm_password" >
+        <br/>
+        <input type="submit" value="sign up" >
+    </form>
+</body>
+</html>

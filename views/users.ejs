@@ -1,0 +1,10 @@
+    <%- include("partials/header.ejs") %>
+
+    <h1>Users</h1>
+    <%if(locals.data){%> 
+        <% for(var i=0;i<data.length;i++){%>
+            <a href="/main/<%= data[i].user_id %> "><%= data[i].user_name %></a>
+            <br/>
+    <%}}%>
+
+    <%- include("partials/footer.ejs") %>
