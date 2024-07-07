@@ -409,7 +409,7 @@ app.get("/search", requireLogin, async(req,res) =>{
 
 app.post("/search", requireLogin, async (req, res) => {
     var query = encodeURIComponent(req.body.query);
-    var apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=20&key=AIzaSyBGbtoROJcMmKjmBywYdQY16gXovH0u3Yw`;
+    var apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=20&key=xyz`;
 
     try {
         var response = await axios.get(apiUrl);
