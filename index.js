@@ -76,8 +76,8 @@ io.on('connection', (socket) => {
         const senderSocketId = userSocketMap[sender_id];
 
         if (recipientSocketId) {
-            io.to(recipientSocketId).emit("message", message);
-            io.to(senderSocketId).emit("message", message);
+            io.to(recipientSocketId).emit("message", {message, sender_id});
+            io.to(senderSocketId).emit("message", {message, sender_id});
             console.log(`Message sent to user ${recipient_id}:`, message);
         } else {
             console.log(`User with ID ${recipient_id} is not connected.`);

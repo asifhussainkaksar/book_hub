@@ -21,11 +21,16 @@
         const messageInput = document.getElementById("message");
         const allMessages = document.getElementById("messages");
         
-        socket.on("message", (message)=> {
-            console.log(message);
+        socket.on("message", ({message, sender_id})=> {
+            if (sender_id === receiver || sender_id==sender) {
+            console.log('Message from active chat:', message);
             const p = document.createElement("p");
             p.innerText = message;
             allMessages.appendChild(p);
+        } else {
+            // You could store this message elsewhere or show a notification for a new message from a different user
+            console.log('Message from another user (not active chat):', message);
+        }
         });
 
         sendBtn.addEventListener("click", (e) =>{
