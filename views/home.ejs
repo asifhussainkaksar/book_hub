@@ -1,0 +1,84 @@
+    <%- include("partials/header.ejs") %>
+    
+    <div class="hoo">
+    <div class="rona">
+    <%if(locals.photo){%>
+        <img class="foo" src="/<%= photo %>" alt="profile photo" />
+    <%}%>
+    <h2><%= user_name %></h2>
+    </div>
+
+    <div class="rona">
+    <form method="post" action="/sort/<%= user_id %>">
+        <br/>
+        <label for="sortOptions">Sort By:</label>
+        <select id="sortOptions" name="sortOptions" onchange="this.form.submit()">
+            <option value="sort">sort</option>
+            <option value="recency">Recency</option>
+            <option value="rating">Rating</option>
+            <option value="title">Title</option>
+        </select>
+        <!-- No submit button needed -->
+    </form>
+    </div>
+    </div>
+    
+    <div class="moo">
+    <%if(locals.r){
+        if(r){%> 
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="userId" value="<%= user_id %>">
+        <input type="file" id="profilePhoto" name="profilePhoto" accept="image/*" required>
+        <button type="submit">Upload Photo</button>
+    </form>
+    <%}}%>
+</div>
+
+    <div class="container">
+    <% if(locals.data){ %>
+        <% for(var i=0;i<data.length;i++){%>
+        
+        <div class="book">
+            <a href="/book/<%= user_id %>/<%= data[i].book_id %>">
+                <img class="img" src="<%= data[i].cover %>" alt="book cover" />
+            </a>
+        <h2 class="title"> 
+            <a href="/book/<%= user_id %>/<%= data[i].book_id %>"><%= data[i].title %> </a>
+            by <%= data[i].author %>
+        </h2>
+        
+        <p> isbn: <%= data[i].isbn  %> </p>
+        
+        <%
+        function formatDate(date) {
+            if (!(date instanceof Date)) {
+            date = new Date(date);
+        }
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${day}-${month}-${year}`;
+        }
+        %>   
+        <p>Date Read: <%= formatDate(data[i].entry_date) %></p>
+
+        <p>Rating:
+            <% for (let j = 0; j < 5; j++) { %>
+            <% if (j < data[i].rating) { %>
+                <span style="color: yellow;">&#9733;</span>
+            <% } else { %>
+                <span>&#9733;</span>
+            <% } %>
+            <% } %>
+            </p>
+        
+        <p> <%= data[i].review %> </p>
+        
+        </div>
+        <%}%>
+    <% } %>
+
+</div>
+
+    <%- include("partials/footer.ejs") %>
+
