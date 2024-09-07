@@ -1,5 +1,4 @@
 
-
 .container{
     display: flex;
     flex-direction: column;
@@ -211,3 +210,83 @@
       text-align: left;
     }
   }
+
+
+
+
+
+
+/* Style for the overall chat container */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 90vh; /* Adjust height according to the screen */
+    width: 60%;
+    margin-left:20%;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the message container */
+.messages-container {
+    flex: 1; /* Fills up the available space */
+    overflow-y: auto; /* Enables scrolling for older messages */
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+/* Style for the chat input box */
+.chat-input {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    background-color: #fff;
+}
+
+#message {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+#sendBtn {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#sendBtn:hover {
+    background-color: #218838;
+}
+
+/* Style for the individual messages */
+.message {
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+    max-width: 60%;
+    word-wrap: break-word;
+}
+
+.sender {
+    background-color: #daf8e3;
+    text-align: left;
+    margin-left: auto;
+}
+
+.receiver {
+    background-color: #f1f0f0;
+    text-align: left;
+    margin-right: auto;
+}
+
+/* Scroll behavior for smoother experience */
+.messages-container {
+    scroll-behavior: smooth;
+}
