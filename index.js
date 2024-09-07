@@ -45,15 +45,15 @@ app.use(session({
     saveUninitialized: true
 }));
 
-const db = new pg.Client({
-    user:"postgres",
-    host:"localhost",
-    database:"book_hub2",
-    password:"Qwert..",
-    port: 5432,
+const db = new pg.Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
-
-db.connect();
+db.connect()
+.then(() => console.log("Connected to the database"))
+.catch(err => console.error("Connection error", err.stack));
 
 
 
