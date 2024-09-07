@@ -1,0 +1,69 @@
+<%- include("partials/header.ejs") %>
+<div class="search"> 
+    <div class="one">
+
+    <div class="moh"> 
+    <h3>search the book you want to add to your library</h3>   
+    <%if(locals.err){%>
+        <p><%=err%></p>
+    <%}%>
+    <form action="/search" method="post">
+        <input type="text" name="query" placeholder="enter title or author" > <br/> <br/>
+        <input type="submit" value="submit">
+    </form>
+    </div>
+
+    <% if(locals.books){%>
+        <div class="rah">
+        <% for(var i=0;i<books.length;i++){ %>
+            <div>
+            <% if (books[i].cover !== 'Cover not available') { %>
+            <img class="row" src="<%= books[i].cover %>" alt="Book Cover">
+            <% }%>
+            
+            
+            <p><%=books[i].title%></p>
+            <p><%=books[i].author%></p>
+            <p><%=books[i].isbn%></p>
+            
+
+            <form action="/add_review/<%= books[i].isbn %>/<%= encodeURIComponent(books[i].title) %>/<%= encodeURIComponent(books[i].author) %>/<%= encodeURIComponent(books[i].cover) %>" method="get">
+                <input type="submit" value="Add book">
+            </form>
+            
+
+            </div>
+ 
+        <% } %>
+        </div>
+    <%}%>
+    </div>
+    
+    <div class="two">
+
+    <div class="moh">
+    <h3>Search a book in your database</h3>
+    <form action="/search_database" method="post">
+        <input type="text" name="query" placeholder="enter title or author" > <br/> <br/>
+        <input type="submit" value="submit">
+    </form>
+    </div>
+    
+    <%if(locals.data){%>
+        <div class="rah">
+        <%for(var i=0;i<data.length;i++){%>
+        <div>
+        <img class="row" src=<%=data[i].cover%> alt="book cover"  />
+        <br/>
+        <a href="/book/<%= data[i].user_id %>/<%= data[i].book_id %>"><%= data[i].title %> </a>
+        <p><%= data[i].author %></p>
+    </div>
+    <%}%>
+        </div>
+<%}%>
+    </div>
+
+        </div>
+
+    
+<%- include("partials/footer.ejs") %>

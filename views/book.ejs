@@ -1,0 +1,66 @@
+    <%- include("partials/header.ejs") %>
+    
+    <div class="room">
+    <%if(locals.data){%>
+        <img class="img" src="<%= data.cover %>" alt="book cover"  />
+
+        <h2 class="title"> 
+            <%= data.title %>
+            by <%= data.author %>
+        </h2>
+
+        <p> isbn: <%= data.isbn  %> </p>
+        
+        <%
+        function formatDate(date) {
+            if (!(date instanceof Date)) {
+            date = new Date(date);
+        }
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${day}-${month}-${year}`;
+        }
+        %>   
+        <p>Date Read: <%= formatDate(data.entry_date) %></p>
+
+        <p>Rating:
+            <% for (let j = 0; j < 5; j++) { %>
+            <% if (j < data.rating) { %>
+                <span style="color: yellow;">&#9733;</span>
+            <% } else { %>
+                <span>&#9733;</span>
+            <% } %>
+            <% } %>
+            </p>
+        
+        <h3>review:</h3>
+        <p> <%= data.review %> </p>
+        
+    <%}%>
+
+    <%if(locals.notes){%>
+        <h3>Notes:</h3>
+        <%for(var i=0;i<notes.length;i++){%>
+            <p><%=notes[i].note%></p>
+        <%}%>
+    <%}%>
+    
+    <div class="no">
+    <%if(r){%>
+    <form action="/delete_book/<%= user_id %>/<%= data.book_id %>">
+        <button>delete</button>
+    </form>
+
+    <form action="/edit_review/<%= user_id %>/<%= data.book_id %>">
+        <button>Edit Review</button>
+    </form>
+
+    <form action="/add_notes/<%= user_id %>/<%= data.book_id %>">
+        <button>Add Notes</button>
+    </form>
+    </div>
+    <%}%>
+</div>
+
+<%- include("partials/footer.ejs")  %>
