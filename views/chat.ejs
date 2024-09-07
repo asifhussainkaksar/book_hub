@@ -2,11 +2,18 @@
 
 <h1>Chatting</h1>
     
+    
+    
+    <% if(locals.chat_history){%>
+        <%for(var i=0;i<chat_history.length;i++){%>
+        <p><%= chat_history[i].message %></p>
+        <%}%>
+    <%}%>
+
+    <div id="messages"></div>
     <input id="message" type="text" placeholder="enter message"/>
     <button id="sendBtn">Send</button>
     
-    <div id="messages"></div>
-
     <script src="/socket.io/socket.io.js"></script>
     <script>
         const socket = io(); // Initialize Socket.IO client
@@ -41,5 +48,6 @@
         })
 
     </script>
+
 
 <%- include("partials/footer.ejs") %>

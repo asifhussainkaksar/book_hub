@@ -66,18 +66,15 @@ io.on('connection', (socket) => {
         console.log(`User ${user_id} is connected with socket ID: ${socket.id}`);
     });
 
-    /*socket.on('user-message', (message)=>{
-    //console.log("A new user message:", message);
-    io.emit("message", message);
-    })*/
-
-    socket.on('user-message', ({ message, recipient_id, sender_id }) => {
+    socket.on('user-message', async ({ message, recipient_id, sender_id }) => {
         const recipientSocketId = userSocketMap[recipient_id];
         const senderSocketId = userSocketMap[sender_id];
-
+        
+        await db.query("insert into messages (sender_id, receiver_id, message) values ($1, $2, $3)",[sender_id, recipient_id, message]);
+        
+        io.to(senderSocketId).emit("message", {message, sender_id});
         if (recipientSocketId) {
             io.to(recipientSocketId).emit("message", {message, sender_id});
-            io.to(senderSocketId).emit("message", {message, sender_id});
             console.log(`Message sent to user ${recipient_id}:`, message);
         } else {
             console.log(`User with ID ${recipient_id} is not connected.`);
@@ -565,8 +562,10 @@ app.get("/message", requireLogin, async (req, res) =>{
 app.get("/message/:id", requireLogin, async (req, res) =>{
     var sender = req.session.user_id;
     var receiver = req.params.id;
-
-    res.render("chat.ejs", {sender: sender, receiver: receiver});
+    
+    var y = await db.query("select * from messages where (sender_id=$1 and receiver_id=$2) or (sender_id=$2 and receiver_id=$1) order by timestamp",[sender, receiver]);
+    //console.log(y.rows);
+    res.render("chat.ejs", {sender: sender, receiver: receiver, chat_history : y.rows});
 });
 
 
