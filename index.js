@@ -1,6 +1,5 @@
 import express from "express";
 import bodyParser from "body-parser";
-import bcrypt from "bcrypt";
 import axios from "axios";
 import pg from "pg";
 import session from "express-session";
