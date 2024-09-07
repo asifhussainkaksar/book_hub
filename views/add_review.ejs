@@ -9,7 +9,7 @@
         <p><%= err %></p>
     <%}%>
     
-    <form action="/submit_book/<%=isbn %>/<%= title %>/<%= author %>/<%= encodeURIComponent(cover) %>" method="POST">
+    <form action="/submit_book/<%=isbn %>/<%= encodeURIComponent(title) %>/<%= encodeURIComponent(author) %>/<%= encodeURIComponent(cover) %>" method="POST">
         <label for="review">Review Text:</label><br>
         <textarea id="review" name="review" rows="4" cols="50"></textarea><br>
         

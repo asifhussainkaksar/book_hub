@@ -48,7 +48,7 @@ app.use(session({
 const db = new pg.Client({
     user:"postgres",
     host:"localhost",
-    database:"book_hub",
+    database:"book_hub2",
     password:"Qwert..",
     port: 5432,
 });
@@ -321,9 +321,9 @@ app.post("/submit_book/:id/:id1/:id2/:id3", requireLogin, async (req, res) => {
     var review = req.body.review;
     var rating = req.body.rating;
     var book_id;
-    var title=req.params.id1;
-    var author=req.params.id2;
-    var cover=req.params.id3;
+    var title=decodeURIComponent(req.params.id1);
+    var author=decodeURIComponent(req.params.id2);
+    var cover=decodeURIComponent(req.params.id3);
 
         // Check if the book already exists in your database
         var dbBook = await db.query("SELECT * FROM books WHERE isbn = $1", [isbn]);
