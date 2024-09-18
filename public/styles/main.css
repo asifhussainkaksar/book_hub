@@ -282,17 +282,25 @@
 }
 
 /* Style for the individual messages */
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> new-origin/main
 .message {
     padding: 10px;
     border-radius: 5px;
     margin: 5px 0;
+<<<<<<< HEAD
     max-width: 60%; /* Maximum width of the message bubble */
     min-width: 100px; /* Minimum width to prevent too narrow bubbles, adjust as needed */
     width: auto; /* Allow the width to grow based on content */
     word-wrap: break-word; /* Break long words to fit inside the bubble */
     display: inline-block; /* Ensure the bubble only takes up as much width as needed by its content */
+=======
+    max-width: 60%;
+    word-wrap: break-word;
+>>>>>>> new-origin/main
 }
 
 .sender {
