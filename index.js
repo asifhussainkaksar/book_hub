@@ -45,7 +45,7 @@ app.use(session({
 }));
 
 
-/*const db = new pg.Pool({
+const db = new pg.Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: {
         rejectUnauthorized: false
@@ -54,10 +54,10 @@ app.use(session({
 db.connect()
 .then(() => console.log("Connected to the database"))
 .catch(err => console.error("Connection error", err.stack)); 
-*/
 
 
-const db = new pg.Client({
+
+/*const db = new pg.Client({
     user: "postgres",
     host: "localhost",
     database: "book_hub",
@@ -66,6 +66,7 @@ const db = new pg.Client({
  });
 
  db.connect();
+ */
 
 
 
