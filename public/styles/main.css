@@ -235,6 +235,7 @@
     margin-left:20%;
     border: 1px solid #ddd;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom:10px;
 }
 
 @media (max-width:600px) and (min-width:319px){
@@ -245,7 +246,7 @@
   }
 /* Style for the message container */
 .messages-container {
-    flex: 1; /* Fills up the available space */
+    flex: 1; /* Fills up the available space */   
     overflow-y: auto; /* Enables scrolling for older messages */
     padding: 10px;
     background-color: #f9f9f9;
@@ -282,7 +283,35 @@
 }
 
 /* Style for the individual messages */
-<<<<<<< HEAD
+
+
+
+
+
+.message-wrapper {
+    display: flex;
+    width:100%;
+    margin: 5px 0;
+}
+
+/* Ensure sender's messages go to the right */
+.message-wrapper.sender-wrapper {
+    justify-content: flex-end;
+}
+
+/* Ensure receiver's messages go to the left */
+.message-wrapper.receiver-wrapper {
+    justify-content: flex-start;
+}
+
+.messages-container {
+    scroll-behavior: smooth;
+}
+
+
+
+
+
 
 
 =======
@@ -292,11 +321,10 @@
     border-radius: 5px;
     margin: 5px 0;
 <<<<<<< HEAD
-    max-width: 60%; /* Maximum width of the message bubble */
-    min-width: 100px; /* Minimum width to prevent too narrow bubbles, adjust as needed */
-    width: auto; /* Allow the width to grow based on content */
-    word-wrap: break-word; /* Break long words to fit inside the bubble */
-    display: inline-block; /* Ensure the bubble only takes up as much width as needed by its content */
+    width:auto;
+    max-width:60%;
+    min-width:50px;
+    word-wrap: break-word; /* Handle long words and avoid overflow */
 =======
     max-width: 60%;
     word-wrap: break-word;
@@ -304,6 +332,7 @@
 }
 
 .sender {
+    border-radius:6px;
     background-color: #daf8e3;
     text-align: left;
     margin-left: auto;
@@ -311,6 +340,7 @@
 
 .receiver {
     background-color: #f1f0f0;
+    border-radius: 6px;
     text-align: left;
     margin-right: auto;
 }
