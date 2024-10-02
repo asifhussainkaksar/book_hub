@@ -314,21 +314,15 @@
 
 
 
-=======
->>>>>>> new-origin/main
+
 .message {
     padding: 10px;
     border-radius: 5px;
     margin: 5px 0;
-<<<<<<< HEAD
     width:auto;
     max-width:60%;
     min-width:50px;
     word-wrap: break-word; /* Handle long words and avoid overflow */
-=======
-    max-width: 60%;
-    word-wrap: break-word;
->>>>>>> new-origin/main
 }
 
 .sender {
