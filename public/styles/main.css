@@ -24,7 +24,15 @@
 
 .book{
     width: 55%;
+    background-color: #f2f2f2;
+    border-radius:20px;
 }
+
+@media (max-width:600px) and (min-width:319px){
+    .book{
+        width:90%;
+    }
+  }
 
 
 .ha{
@@ -54,6 +62,14 @@
     margin-top:20px;
     margin-left:22.5%;
 }
+
+@media (max-width:600px) and (min-width:319px){
+    .room{
+        width:90%;
+        margin-left:5%;
+        margin-bottom:30px;
+    }
+  }
 
 .no{
     display: flex;
@@ -114,12 +130,25 @@
     justify-content: space-between;
 }
 
+@media (max-width:600px) and (min-width:319px){
+    .hoo{
+        margin-left:5%;
+    }
+  }
+
+
 .moo{
     margin-left:22.6%;
     width:55%;
     margin-top:20px;
     margin-bottom: 30px;
 }
+
+@media (max-width:600px) and (min-width:319px){
+    .moo{
+        margin-left:5%;
+    }
+  }
 
 .rona a{
     text-decoration: none;
@@ -361,6 +390,7 @@ html, body {
     height: 100%;
     margin: 0;
     display: flex;
+    gap:30px;
     flex-direction: column;
 }
 
