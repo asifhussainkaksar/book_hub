@@ -8,6 +8,7 @@ import path from "path";
 import { fileURLToPath } from 'url'; 
 import http from "http";
 import { Server } from "socket.io";
+import fs from "fs"
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,7 +21,7 @@ const io = new Server(server);
 const userSocketMap = {};
 
 
-const storage = multer.diskStorage({
+/*const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'uploads/');
     },
@@ -30,7 +31,10 @@ const storage = multer.diskStorage({
     });
   
   
-const upload = multer({ storage: storage });
+const upload = multer({ storage: storage });*/
+
+//changed thing
+const upload = multer({ dest: 'uploads/' });
 
 
 app.use(express.static("public"));
@@ -45,7 +49,7 @@ app.use(session({
 }));
 
 
-const db = new pg.Pool({
+/*const db = new pg.Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: {
         rejectUnauthorized: false
@@ -53,11 +57,11 @@ const db = new pg.Pool({
 });
 db.connect()
 .then(() => console.log("Connected to the database"))
-.catch(err => console.error("Connection error", err.stack)); 
+.catch(err => console.error("Connection error", err.stack)); */
 
 
 
-/*const db = new pg.Client({
+const db = new pg.Client({
     user: "postgres",
     host: "localhost",
     database: "book_hub",
@@ -65,7 +69,7 @@ db.connect()
     port: 5432,
  });
 
- db.connect();*/
+ db.connect();
  
 
 
@@ -545,7 +549,7 @@ app.post('/upload', upload.single('profilePhoto'), requireLogin, async (req, res
     const userId = req.body.userId; // Assuming the user ID is sent in the request body
     const profilePhoto = req.file.path;
   
-    try {
+    /*try {
       const result = await db.query(
         'UPDATE users SET photo = $1 WHERE user_id = $2',
         [profilePhoto, userId]
@@ -554,9 +558,53 @@ app.post('/upload', upload.single('profilePhoto'), requireLogin, async (req, res
     } catch (err) {
       console.error(err);
       res.status(500).send('Error uploading photo');
+    }*/
+    
+    try {
+        // Read the image as binary data (Buffer)
+        const profilePhotoBinary = fs.readFileSync(profilePhoto);
+        
+        // Store the binary data in PostgreSQL
+        const result = await db.query(
+            'UPDATE users SET photob = $1 WHERE user_id = $2',
+            [profilePhotoBinary, userId]
+        );
+        
+        // Redirect after successful upload
+        res.redirect("/main");
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error uploading photo');
     }
+
   });
 
+
+
+
+  app.get('/image/:userId', async (req, res) => {
+    const userId = req.params.userId;
+  
+    try {
+        // Query the image data from PostgreSQL
+        const result = await db.query('SELECT photob FROM users WHERE user_id = $1', [userId]);
+
+        if (result.rows.length > 0) {
+            const imageData = result.rows[0].photob;
+
+            // Set content type to image (Assuming it's a PNG/JPG, you can adjust based on actual type)
+            res.set('Content-Type', 'image/jpeg'); // or 'image/png' based on your actual image format
+
+            // Send the binary image data
+            res.send(imageData);
+        } else {
+            res.status(404).send('Image not found');
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error retrieving image');
+    }
+});
 
 
 
