@@ -21,19 +21,7 @@ const io = new Server(server);
 const userSocketMap = {};
 
 
-/*const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'uploads/');
-    },
-    filename: function (req, file, cb) {
-        cb(null, `${Date.now()}-${file.originalname}`);
-    }
-    });
-  
-  
-const upload = multer({ storage: storage });*/
 
-//changed thing
 const upload = multer({ dest: 'uploads/' });
 
 
@@ -69,8 +57,8 @@ db.connect()
     port: 5432,
  });
 
- db.connect();*/
- 
+ db.connect();
+ */
 
 
 
