@@ -4,9 +4,15 @@
     <%if(locals.data){%> 
         <% for(var i=0;i<data.length;i++){%>
             <div class="rona">
+                <%if(data[i].photob===null){%>
+                    <a href="/main/<%= data[i].user_id %>">
+                            <img class="foo" src="/assets/images.jpg" />
+                    </a>
+            <%}else{%>
             <a href="/main/<%= data[i].user_id %>">
                     <img class="foo" src="/image/<%= data[i].user_id %>" />
             </a>
+            <%}%>
             <a href="/main/<%= data[i].user_id %> "> <h2> <%= data[i].user_name %> </h2> </a>
             </div>
     <%}%>  

@@ -8,8 +8,8 @@
         <p><%=err%></p>
     <%}%>
     <form action="/search" method="post">
-        <input type="text" name="query" placeholder="enter title or author" > <br/> <br/>
-        <input type="submit" value="submit">
+        <input type="text" name="query" placeholder="enter title or author" class="border border-gray-300 p-2 rounded"> <br/> <br/>
+        <input type="submit" value="submit" class="bg-gray text-black border border-gray-400 p-1 rounded cursor-pointer">
     </form>
     </div>
 
@@ -28,7 +28,7 @@
             
 
             <form action="/add_review/<%= books[i].isbn %>/<%= encodeURIComponent(books[i].title) %>/<%= encodeURIComponent(books[i].author) %>/<%= encodeURIComponent(books[i].cover) %>" method="get">
-                <input type="submit" value="Add book">
+                <input type="submit" value="Add book" class="gray text-black border border-gray-400 p-1 rounded cursor-pointer">
             </form>
             
 
@@ -44,8 +44,8 @@
     <div class="moh">
     <h3>Search a book in your database</h3>
     <form action="/search_database" method="post">
-        <input type="text" name="query" placeholder="enter title or author" > <br/> <br/>
-        <input type="submit" value="submit">
+        <input type="text" name="query" placeholder="enter title or author" class="border border-gray-300 p-2 rounded"> <br/> <br/>
+        <input type="submit" value="submit" class="gray text-black border border-gray-400 p-1 rounded cursor-pointer">
     </form>
     </div>
     

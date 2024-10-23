@@ -49,15 +49,15 @@
     <div class="no">
     <%if(r){%>
     <form action="/delete_book/<%= user_id %>/<%= data.book_id %>">
-        <button>delete</button>
+        <button value="submit" class="bg-gray-100 text-black border border-gray-400 p-1 rounded cursor-pointer">delete</button>
     </form>
 
     <form action="/edit_review/<%= user_id %>/<%= data.book_id %>">
-        <button>Edit Review</button>
+        <button value="submit" class="bg-gray-100 text-black border border-gray-400 p-1 rounded cursor-pointer">Edit Review</button>
     </form>
 
     <form action="/add_notes/<%= user_id %>/<%= data.book_id %>">
-        <button>Add Notes</button>
+        <button value="submit" class="bg-gray-100 text-black border border-gray-400 p-1 rounded cursor-pointer">Add Notes</button>
     </form>
     </div>
     <%}%>

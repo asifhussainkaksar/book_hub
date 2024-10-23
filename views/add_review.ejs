@@ -1,5 +1,6 @@
     <%- include("partials/header.ejs") %>
-
+    
+    <div class="mnb">
     <h2>Add a book to your database</h2>
     <%if(locals.data){%>
         <p><%= data %></p>
@@ -9,14 +10,14 @@
         <p><%= err %></p>
     <%}%>
     
-    <form action="/submit_book/<%=isbn %>/<%= encodeURIComponent(title) %>/<%= encodeURIComponent(author) %>/<%= encodeURIComponent(cover) %>" method="POST">
-        <label for="review">Review Text:</label><br>
-        <textarea id="review" name="review" rows="4" cols="50"></textarea><br>
+    <form class="mnr" action="/submit_book/<%=isbn %>/<%= encodeURIComponent(title) %>/<%= encodeURIComponent(author) %>/<%= encodeURIComponent(cover) %>" method="POST">
         
-        <label for="rating">Rating:</label><br>
-        <input type="number" id="rating" name="rating" min="1" max="5"><br><br>
+        <textarea placeholder="review" id="review" name="review" rows="4" cols="50" class="border border-gray-300 p-2 rounded"></textarea>
         
-        <input type="submit" value="Submit Book">
+        
+        <input placeholder="rating" type="number" id="rating" name="rating" min="1" max="5" class="border border-gray-300 p-2 rounded">
+        
+        <input class="bq" type="submit" value="Submit Book" >
     </form>
-
+    </div>
     <%- include("partials/footer.ejs") %>

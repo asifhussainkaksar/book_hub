@@ -37,7 +37,7 @@ app.use(session({
 }));
 
 
-const db = new pg.Pool({
+/*const db = new pg.Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: {
         rejectUnauthorized: false
@@ -46,10 +46,10 @@ const db = new pg.Pool({
 db.connect()
 .then(() => console.log("Connected to the database"))
 .catch(err => console.error("Connection error", err.stack)); 
+*/
 
 
-
-/*const db = new pg.Client({
+const db = new pg.Client({
     user: "postgres",
     host: "localhost",
     database: "book_hub",
@@ -58,7 +58,7 @@ db.connect()
  });
 
  db.connect();
- */
+ 
 
 
 
@@ -68,7 +68,7 @@ io.on('connection', (socket) => {
     
     socket.on('register-user', (user_id) => {
         userSocketMap[user_id] = socket.id;
-        console.log(`User ${user_id} is connected with socket ID: ${socket.id}`);
+        //console.log(`User ${user_id} is connected with socket ID: ${socket.id}`);
     });
 
     socket.on('user-message', async ({ message, recipient_id, sender_id }) => {
