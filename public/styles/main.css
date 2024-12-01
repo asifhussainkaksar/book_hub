@@ -404,7 +404,7 @@ main {
 
 /* Footer will stay at the bottom */
 footer {
-    /*background-color: #3d7b9f; */
+    background-color: #3d7b9f; 
     color: #ecf0f1;
     padding: 30px 0;
     text-align: center;
