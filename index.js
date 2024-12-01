@@ -37,7 +37,7 @@ app.use(session({
 }));
 
 
-const db = new pg.Pool({
+/*const db = new pg.Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: {
         rejectUnauthorized: false
@@ -46,10 +46,10 @@ const db = new pg.Pool({
 db.connect()
 .then(() => console.log("Connected to the database"))
 .catch(err => console.error("Connection error", err.stack)); 
+*/
 
 
-
-/*const db = new pg.Client({
+const db = new pg.Client({
     user: "postgres",
     host: "localhost",
     database: "book_hub",
@@ -58,7 +58,7 @@ db.connect()
  });
 
 db.connect();
-*/
+
 
 
 
@@ -242,7 +242,7 @@ app.get("/main",requireLogin, async (req,res) =>{
     var x = await db.query("select * from users where user_id = $1",[user_id]);
     var y=x.rows[0].user_name;
 
-    var photo = x.rows[0].photo;
+    var photo = x.rows[0].photob;
     var r=1;
     //console.log("main "+photo);
 
@@ -576,10 +576,10 @@ app.post('/upload', upload.single('profilePhoto'), requireLogin, async (req, res
     try {
         // Query the image data from PostgreSQL
         const result = await db.query('SELECT photob FROM users WHERE user_id = $1', [userId]);
-
+        
         if (result.rows.length > 0) {
             const imageData = result.rows[0].photob;
-
+            console.log(imageData);
             // Set content type to image (Assuming it's a PNG/JPG, you can adjust based on actual type)
             res.set('Content-Type', 'image/jpeg'); // or 'image/png' based on your actual image format
 
