@@ -37,7 +37,7 @@ app.use(session({
 }));
 
 
-const db = new pg.Pool({
+/*const db = new pg.Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: {
         rejectUnauthorized: false
@@ -46,9 +46,9 @@ const db = new pg.Pool({
 db.connect()
 .then(() => console.log("Connected to the database"))
 .catch(err => console.error("Connection error", err.stack)); 
+*/
 
 
-/*
 const db = new pg.Client({
     user: "postgres",
     host: "localhost",
@@ -58,12 +58,12 @@ const db = new pg.Client({
  });
 
 db.connect();
-*/
+
 
 
 
 io.on('connection', (socket) => {
-    console.log('A user connected:', socket.id);
+    //console.log('A user connected:', socket.id);
     
     
     socket.on('register-user', (user_id) => {
@@ -579,7 +579,7 @@ app.post('/upload', upload.single('profilePhoto'), requireLogin, async (req, res
         
         if (result.rows.length > 0) {
             const imageData = result.rows[0].photob;
-            console.log(imageData);
+            //console.log(imageData);
             // Set content type to image (Assuming it's a PNG/JPG, you can adjust based on actual type)
             res.set('Content-Type', 'image/jpeg'); // or 'image/png' based on your actual image format
 
